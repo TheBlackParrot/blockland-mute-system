@@ -88,16 +88,18 @@ function serverCmdMute(%client,%victim,%time) {
 	MuteDB.add(%row);
 	saveMuteRow(%row);
 
-	if(%name $= "") {
-		%who_str = "\c1BL_ID:" SPC %victim SPC "\c2(ID:" SPC %victim @ ")";
-	} else {
-		%who_str = "\c1" @ %name SPC "\c2(ID:" SPC %victim_obj.bl_id @ ")";
-	}
+	if($Mute::Server::Announce) {
+		if(%name $= "") {
+			%who_str = "\c1BL_ID:" SPC %victim SPC "\c2(ID:" SPC %victim @ ")";
+		} else {
+			%who_str = "\c1" @ %name SPC "\c2(ID:" SPC %victim_obj.bl_id @ ")";
+		}
 
-	if(%expires $= "never") {
-		messageAll('MsgAdminForce',"\c3" @ %client.name SPC "\c2permanently muted" SPC %who_str);
-	} else {
-		messageAll('MsgAdminForce',"\c3" @ %client.name SPC "\c2muted" SPC %who_str SPC "\c2for" SPC %time SPC "minutes");
+		if(%expires $= "never") {
+			messageAll('MsgAdminForce',"\c3" @ %client.name SPC "\c2permanently muted" SPC %who_str);
+		} else {
+			messageAll('MsgAdminForce',"\c3" @ %client.name SPC "\c2muted" SPC %who_str SPC "\c2for" SPC %time SPC "minutes");
+		}
 	}
 }
 
@@ -156,13 +158,15 @@ function serverCmdUnmute(%client,%victim) {
 		return 0;
 	}
 
-	if(%name $= "") {
-		%who_str = "\c1BL_ID:" SPC %bl_id SPC "\c2(ID:" SPC %bl_id @ ")";
-	} else {
-		%who_str = "\c1" @ %name SPC "\c2(ID:" SPC %bl_id @ ")";
-	}
+	if($Mute::Server::Announce) {
+		if(%name $= "") {
+			%who_str = "\c1BL_ID:" SPC %bl_id SPC "\c2(ID:" SPC %bl_id @ ")";
+		} else {
+			%who_str = "\c1" @ %name SPC "\c2(ID:" SPC %bl_id @ ")";
+		}
 
-	messageAll('MsgAdminForce',"\c3" @ %client.name SPC "\c2unmuted" SPC %who_str);
+		messageAll('MsgAdminForce',"\c3" @ %client.name SPC "\c2unmuted" SPC %who_str);
+	}
 }
 
 function saveMuteRow(%row) {

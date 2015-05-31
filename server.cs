@@ -2,7 +2,7 @@ $Mute::Core::Root = "Add-Ons/Server_Mute";
 $Mute::Core::Config = "config/server/mute/config.cs";
 $Mute::Core::SaveDir = "config/server/mute/saves";
 
-$Mute::Core::Version = "0.1.0-1";
+$Mute::Core::Version = "1.0.0-2";
 
 exec("./support.cs");
 exec("./timestamp.cs");

@@ -35,7 +35,12 @@ package MuteServerPackage {
 			return parent::serverCmdMessageSent(%client,%msg);
 		} else {
 			%client.play2D("errorSound");
-			messageClient(%client,'',"\c6You have been muted. It expires on" SPC convertTimestamp(%client.getMuteRow().expires));
+			%row = %client.getMuteRow();
+			if(%row.expires $= "never") {
+				messageClient(%client,'',"\c6You have been permanently muted.");
+			} else {
+				messageClient(%client,'',"\c6You have been muted. It expires on" SPC convertTimestamp(%client.getMuteRow().expires));
+			}
 			return 0;
 		}
 	}
