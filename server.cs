@@ -2,7 +2,7 @@ $Mute::Core::Root = "Add-Ons/Server_Mute";
 $Mute::Core::Config = "config/server/mute/config.cs";
 $Mute::Core::SaveDir = "config/server/mute/saves";
 
-$Mute::Core::Version = "1.0.0-2";
+$Mute::Core::Version = "1.1.0-1";
 
 exec("./support.cs");
 exec("./timestamp.cs");
@@ -13,9 +13,7 @@ function initMuteConfig() {
 	if(!isFile(%filename)) {
 		$Mute::Server::Announce = 1;
 		$Mute::Server::AllowRank = "Admin";
-		// I'll add in a shadow mute later, where the victim's messages won't be seen by anyone but the victim
-		// might require recoding chat, may not be worth the effort
-		// $Mute::Server::Shadow = 0;
+		$Mute::Server::Shadow = 0;
 		$Mute::Server::AllowIsTyping = 0;
 		export("$Mute::Server::*",%filename);
 	}
